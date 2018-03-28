@@ -1,0 +1,136 @@
+{% load staticfiles %}
+<!doctype html>
+<html class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jcgame</title>
+  <!-- Set render engine for 360 browser -->
+  <meta name="renderer" content="webkit">
+
+  <!-- No Baidu Siteapp-->
+  <meta http-equiv="Cache-Control" content="no-siteapp"/>
+
+  <link rel="shortcut icon" href="./static/assets/pic/favicon.ico">
+  <!-- Add to homescreen for Chrome on Android -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <link rel="shortcut icon" href="./static/assets/pic/favicon.ico">
+
+  <!-- Add to homescreen for Safari on iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
+  <link rel="apple-touch-icon-precomposed" href="./static/assets/i/app-icon72x72@2x.png">
+
+  <!-- Tile icon for Win8 (144x144 + tile color) -->
+  <meta name="msapplication-TileImage" content="./static/assets/i/app-icon72x72@2x.png">
+  <meta name="msapplication-TileColor" content="#0e90d2">
+
+
+
+  <link rel="stylesheet" href="./static/assets/css/amazeui.min.css">
+  <link rel="stylesheet" href="./static/assets/css/app.css">
+  <script type="text/javascript" src="./static/assets/js/jquery.min.js"></script> 
+  <script type="text/javascript" src="./static/assets/js/jquery.downCount.js"></script> 
+  <script type="text/javascript" src="./static/assets/js/jcgame.js"></script> 
+<!--   <script type="text/javascript" href="{% static 'assets/js/amazeui.min.js' %}" /> -->
+</head>
+
+<body>
+<!-- <embed src="./static/assets/res/zcb.mp3" hidden="true" autostart="true" loop="true"></embed> -->
+<!-- <embed src="./static/assets/res/zcb.mp3" autostart="true" loop="true"></embed> -->
+<!-- <h1 align="center" style="margin-top:150px;">JcGame</h1> -->
+<p style="text-align:center"><img src="./static/assets/pic/logo.png" width="25%" onclick="showNews()" id="jcgame"></p>
+<ul class="countdown">
+  <li> <span class="days">99</span>
+    <p class="days_ref">days</p>
+  </li>
+  <li class="seperator">:</li>
+  <li> <span class="hours">24</span>
+    <p class="hours_ref">hours</p>
+  </li>
+  <li class="seperator">:</li>
+  <li> <span class="minutes">59</span>
+    <p class="minutes_ref">minutes</p>
+  </li>
+  <li class="seperator">:</li>
+  <li> <span class="seconds">59</span>
+    <p class="seconds_ref">seconds</p>
+  </li>
+</ul>
+  <div style="text-align:center">
+   <!--  <audio controls="controls" autoplay="true" loop="true"><source src="./static/assets/res/zcb.mp3"></audio> -->
+    <audio autoplay="true" loop="true"><source src="./static/assets/res/zcb.mp3"></audio>
+  </div>
+  <section data-am-widget="accordion" class="am-accordion am-accordion-basic" data-am-accordion='{  }' style=" text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';" >
+      <dl class="am-accordion-item">
+        <dt class="am-accordion-title">
+          让生命去等候，去等候，去等候，去等候
+        </dt>
+        <dd class="am-accordion-bd am-collapse ">
+          <!-- 规避 Collapase 处理有 padding 的折叠内容计算计算有误问题， 加一个容器 -->
+          <div class="am-accordion-content">
+            走在忠孝东路 <br/> 徘徊在茫然中 <br/> 在我的人生旅途 <br/> 选择了多少错误 <br/> 我在睡梦中惊醒 <br/> 感叹悔言无尽 <br/> 恨我不能说服自己 <br/> 接受一切教训 <br/> 让生命去等候 <br/> 等候下一个漂流 <br/> 让生命去等候 <br/>等候下一个伤口
+          </div>
+        </dd>
+      </dl>
+  </section>
+
+
+
+<div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';">
+  <p>欢迎访问<a href="http://www.wolaifan.cn" target="_blank">我来翻--文档翻译平台</a></p>
+</div>
+
+<!-- <div  class="modal-content" style="position:fixed; top: 30%; left: 20%;width:60%; border:1px; display: none" id="showloginfo"> -->
+<div  class="modal-content" style=" display: none" id="showloginfo">
+    <div class="modal-body">
+    </div>
+</div>
+
+<script class="source" type="text/javascript">
+  jQuery('.countdown').downCount({
+    date: '10/26/2018 00:00:00',
+    offset: +50
+  }, function () {
+    alert('生日快乐!');
+  });
+</script>
+
+<!--[if (gte IE 9)|!(IE)]><!-->
+  <script type="text/javascript" src="./static/assets/js/jquery.min.js"></script>
+  <script type="text/javascript" src="./static/assets/js/amazeui.min.js"></script>
+</body>
+</html>
+
+
+
+<script>
+
+    function showNews(){
+        //alert("111")
+        var current = 0;
+        jQuery('#showloginfo').show();
+        jQuery('.am-accordion am-accordion-basic').show();
+        event.stopPropagation();
+    }
+
+
+    function stopPropagation(e) {
+        if (e.stopPropagation)
+            e.stopPropagation();
+        else
+            e.cancelBubble = true;
+        }
+
+jQuery(document).bind('click',function(){
+ jQuery('#showloginfo').hide();
+});
+
+jQuery('#showloginfo').bind('click',function(e){
+stopPropagation(e);
+});
+</script>

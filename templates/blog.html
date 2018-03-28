@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+
+{% block tittle %}
+
+  <title>Blog | 图说</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-siteapp"/>
+  <link rel="alternate icon" type="image/png" href="/static/assets/i/favicon.png">
+  <link rel="stylesheet" href="/static/assets/css/amazeui.min.css"/>
+
+{% endblock %}
+
+
+{% block mainbody %}
+
+<div class="am-g am-g-fixed blog-g-fixed">
+  <div class="am-u-md-8">
+  {% for list in newslist %}
+        <article class="blog-main">
+          <h3 class="am-article-title blog-title">
+            <a href="#">{{list.1}} </a>
+          </h3>
+          <h4 class="am-article-meta blog-meta"> posted on {{list.4}} thanks <a href="http://baike.baidu.com">百度百科</a></h4>
+
+          <div class="am-g blog-content">
+            <div class="am-u-lg-7">  <!-- 关闭转义 -->
+            {% autoescape off %}   
+              {{list.2}}
+            {% endautoescape %}
+            </div>
+            <div class="am-u-lg-5">
+              <p><img src={{list.3}} ></p>
+            </div>
+          </div>
+        </article>
+  {%endfor%}
+
+    <hr class="am-article-divider blog-hr">
+
+
+    <hr class="am-article-divider blog-hr">
+    <ul class="am-pagination blog-pagination">
+      <li class="am-pagination-prev"><a href="">&laquo; 上一页</a></li>
+      <li class="am-pagination-next"><a href="">下一页 &raquo;</a></li>
+    </ul>
+  </div>
+
+{% endblock %}
+

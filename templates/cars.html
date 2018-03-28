@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+
+
+{% block tittle %}
+  <title>Cars | Jcgame</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-siteapp"/>
+  <link rel="alternate icon" type="image/png" href="/static/assets/i/favicon.png">
+  <link rel="stylesheet" href="/static/assets/css/amazeui.min.css"/>
+  <script type="text/javascript" src="/static/assets/js/jquery.min.js"></script>
+  <script src="/static/assets/js/amazeui.min.js"></script>
+  <script src="/static/assets/js/jcgame.js"></script>
+</head>
+
+{% endblock %}
+
+ 
+{% block mainbody %}
+
+
+<!-- 顶图 -->
+  <div class="am-u-md-8" >
+      <p><img src="/static/assets/pic/cars_simulation.png"  alt="模拟摇号" /></p>
+
+    <div class="am-input-group">  
+        <b > 基于国家最新一期摇号中签率897:1</b>
+        <form action="/car_counts" method="post" class="am-form" data-am-validator="validateOnSubmit">    
+          <input title="1-10倍" type="num" class="am-form-field" id="multiple" placeholder="摇号倍数 1-10倍" min="1" max="10" required 
+                  onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
+          <span class="am-input-group-btn">
+            <button class="am-btn am-btn-primary js-modal-toggle " type="submit" id="popres"  
+                    data-am-loading="{spinner: 'circle-o-notch', loadingText: '摇号中'}" >试一试</button>
+          </span>  
+        </form>
+    </div>
+
+<!-- alert 框 -->
+  <div class="am-modal am-modal-alert" tabindex="-1" id="my-alert">  
+    <div class="am-modal-dialog"  >
+      <div class="am-modal-hd">摇号结果</div>
+        <div class="am-modal-bd" id='car_res'></div>
+          <div class="am-modal-footer">
+            <span class="am-modal-btn">确定</span>
+          </div>
+      </div>
+  </div> 
+
+</div>
+
+
+<script src="/static/assets/js/amazeui.min.js"></script>
+
+
+
+<script type="text/javascript">  //从form框获取输入结果
+  
+  $('.am-form').validator({
+  submit: function() {
+      var formValidity = this.isFormValid();
+      if(formValidity==true){
+            popcars()
+      }
+      else{
+        $('#car_res').html("小汽车摇号最大10倍")   
+        $('#my-alert').modal("open")
+      }
+       
+      return false;
+    }
+
+});
+
+</script>
+
+
+<script type="text/javascript">
+
+function popcars(){
+
+        $('#popres').button('loading');
+          jQuery.ajax({
+          type:"POST",
+          url:"cars/car_counts",
+          async:true,
+          dataType:"json",
+          data:{"multiple":$("#multiple").val()},
+          success:function(data){    
+            setTimeout(function(){
+              $('#popres').button('reset');
+              $('#car_res').html(data.str+data.year+'年'+data.month+"月摇中")   
+              $('#my-alert').modal("open")
+              }, 5000); 
+          }
+        });
+
+
+}
+
+    // $('#popres').click(function popcars() {
+    //     var $btn = $(this)
+    //     $btn.button('loading');
+    //       jQuery.ajax({
+    //       type:"POST",
+    //       url:"cars/car_counts",
+    //       async:true,
+    //       dataType:"json",
+    //       data:{"multiple":$("#multiple").val()},
+    //       success:function(data){    
+    //         setTimeout(function(){
+    //           $btn.button('reset');
+    //           $('#car_res').html(data.str+data.year+'年'+data.month+"月摇中")   
+    //           $('#my-alert').modal("open")
+    //           }, 1000); 
+    //       }
+    //     });
+    //   });
+
+
+
+</script>
+
+{% endblock %}
+
