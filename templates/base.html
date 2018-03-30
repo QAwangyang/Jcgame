@@ -3,6 +3,13 @@
 <html>
 <head lang="en">
   <meta charset="UTF-8">
+  <meta http-equiv="Cache-Control" content="no-siteapp"/>
+
+  <link rel="shortcut icon" href="./static/assets/pic/favicon.ico">
+  <!-- Add to homescreen for Chrome on Android -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <link rel="shortcut icon" href="./static/assets/pic/favicon.ico">
+
   {% block tittle %}
   <p>tittle</p>
   {% endblock %}
@@ -64,7 +71,7 @@
 <body>
 <header class="am-topbar">
   <h1 class="am-topbar-brand">
-    <a href="#">blog</a>
+    <a href="http://blog.jcgame.net">Jcgame</a>
   </h1>
 
   <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only"
@@ -77,11 +84,30 @@
       <li class="am-active"><a href="#">首页</a></li>
       <li class="am-dropdown" data-am-dropdown>
         <a class="am-dropdown-toggle" data-am-dropdown-toggle href="javascript:;">
-          菜单 <span class="am-icon-caret-down"></span>
+          已结案 <span class="am-icon-caret-down"></span>
         </a>
         <ul class="am-dropdown-content">
-          <li class="am-dropdown-header"><a href="#">事件2</a></li>
-          <li class="am-dropdown-header"><a href="#">事件2</a></li>
+          <li class="am-dropdown-header"><a href="#">7.21动车事件</a></li>
+          <li class="am-dropdown-header"><a href="#">天津滨海爆炸事件</a></li>
+          <li class="am-dropdown-header"><a href="#">红黄蓝事件</a></li>
+        </ul>
+      </li>
+      <li class="am-dropdown" data-am-dropdown>
+        <a class="am-dropdown-toggle" data-am-dropdown-toggle href="javascript:;">
+          未结案 <span class="am-icon-caret-down"></span>
+        </a>
+        <ul class="am-dropdown-content">
+          <li class="am-dropdown-header"><a href="#"></a></li>
+          <li class="am-dropdown-header"><a href="#"></a></li>
+        </ul>
+      </li>
+      <li class="am-dropdown" data-am-dropdown>
+        <a class="am-dropdown-toggle" data-am-dropdown-toggle href="javascript:;">
+          杂感 <span class="am-icon-caret-down"></span>
+        </a>
+        <ul class="am-dropdown-content">
+          <li class="am-dropdown-header"><a href="#">cocos引擎客户端性能测试杂感</a></li>
+          <li class="am-dropdown-header"><a href="#">排序算法与时间复杂度</a></li>
         </ul>
       </li>
     </ul>
@@ -102,15 +128,13 @@
        <p>body</p>
     {% endblock %}
 
-<!-- 页脚 -->
 
-  <div class="am-u-md-4 blog-sidebar">
+<!--   <div class="am-u-md-4 blog-sidebar">
     <div class="am-panel-group">
       <section class="am-panel am-panel-default">
-        <div class="am-panel-hd">关于我</div>
+        <div class="am-panel-hd">关于我们</div>
         <div class="am-panel-bd">
-          <p>前所未有的中文云端字型服务，让您在 web 平台上自由使用高品质中文字体，跨平台、可搜寻，而且超美。云端字型是我们的事业，推广字型学知识是我们的志业。从字体出发，关心设计与我们的生活，justfont blog
-            正是為此而生。</p>
+          <p>让我们更清楚地了解这个世界</p>
           <a class="am-btn am-btn-success am-btn-sm" href="#">查看更多 →</a>
         </div>
       </section>
@@ -134,9 +158,54 @@
         </div>
       </section>
     </div>
+  </div> -->
+
+
+  <div class="am-u-md-4 blog-sidebar">
+    <div class="am-panel-group">
+      <section class="am-panel am-panel-default">
+        <div class="am-panel-hd">关于我和我们</div>
+        <div class="am-panel-bd">
+          <p>   雀巢咖啡说，人的一生大约要遇见8万人，最终自己回顾一生时，发现坐下喝咖啡的只有6个，其中还包括已经不联系的人。</p>
+          <p>一生一世一双人，半醉半醒半浮生</p>
+          <b>让我们更清楚地了解这个世界</b>
+
+<!--           <a class="am-btn am-btn-success am-btn-sm" href="#">查看更多 →</a> -->
+        </div>
+      </section>
+      <section class="am-panel am-panel-default">
+        <div class="am-panel-hd">友情链接</div>
+        <ul class="am-list blog-list">
+          <li><a href="www.wolaifan.cn">我來翻-文檔翻譯平台</a></li>
+          <li><a href="www.tensorfly.cn">tensorFlow 机器学习</a></li>
+        </ul>
+      </section>
+
+      <section class="am-panel am-panel-default">
+        <div class="am-panel-hd">诗词精选</div>
+        <div class="am-panel-bd">
+
+        <article class="am-article">
+        <div class="am-article-hd">
+          <h1 class="am-article-title">芦叶满汀洲</h1>
+          <p class="am-article-meta">刘过（宋）</p>
+        </div>
+
+        <div class="am-article-bd">
+          <p class="am-article-lead"> 芦叶满汀洲，寒沙带浅流。二十年重过南楼。柳下系船犹未稳，能几日，又中秋。</br>
+            黄鹤断矶头，故人今在否？旧江山浑是新愁。欲买桂花同载酒，终不似，少年游。</p>
+        </div>
+      </article>
+
+        </div>
+      </section>
+
+    </div>
   </div>
 
 </div>
+
+<!-- 页脚 -->
 
 <footer class="blog-footer">
   <p>JcGame<br/>

@@ -24,6 +24,7 @@ def select_all(sql_name):
 def index(request):
 	
 	liked_news = select_all("rightbox")
+	print liked_news
 	newslist = select_all("news")
 	# cursor.execute("UPDATE follow SET followid = 10 WHERE userid = '8' ")    
 	#transaction.commit_unless_managed()

@@ -14,8 +14,6 @@ def cars(request):
     return render(request, 'cars.html')
 
 
-
-
 def user_status(x,ip,t,cd,sql_update):
 	
 	if(t==None):
@@ -31,6 +29,8 @@ def car_counts(request):
 
 	if request.POST:
 		multiple = request.POST['multiple']	#倍数
+		if multiple >10:
+			return
 		car_counts = tools.get_car_counts(int(multiple))   #查询了多少次
 		year_res = tools.get_car_year(car_counts) #年月
 		x=int(time.time()) #当前时间
@@ -48,12 +48,12 @@ def car_counts(request):
 			cursor.execute(sql_insert)
 			re_str="恭喜你<br/>"
 
-		elif(user_status(x,ip,res[0][5],60,sql_update)):  #if cold down
+		elif(user_status(x,ip,res[0][5],720,sql_update)):  #if cold down
 			re_str="恭喜你<br/>"	
 
 		else:
 			if(int(multiple) == res[0][4]):
-				re_str="结果不会变的，攒攒人品再来<br/>"
+				re_str="结果不会变的，攒攒人品过会儿再来<br/>"
 			else:
 				re_str="你换成"+str(multiple)+"倍,结果也不会变的<br/>"
 				cursor.execute("update users_car set multiple='%s' where ip= '%s' " %(multiple,str(ip)))
