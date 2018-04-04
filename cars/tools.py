@@ -2,15 +2,22 @@
 import random
 import datetime
 
+# def get_user_ip(request):
+
+# 	if request.META.has_key('HTTP_X_FORWARDED_FOR'):
+# 		ip =  request.META['HTTP_X_FORWARDED_FOR']
+# 	else:
+# 		ip = request.META['REMOTE_ADDR']
+
+# 	return ip
+
 def get_user_ip(request):
-
-	if request.META.has_key('HTTP_X_FORWARDED_FOR'):
-		ip =  request.META['HTTP_X_FORWARDED_FOR']
+	x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+	if x_forwarded_for:
+		ip = x_forwarded_for.split(',')[-1].strip()
 	else:
-		ip = request.META['REMOTE_ADDR']
-
+		ip = request.META.get('REMOTE_ADDR')
 	return ip
-
 	
 def get_car_counts(Multiple=1):  #算倍数
 	n=1

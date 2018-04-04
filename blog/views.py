@@ -5,7 +5,7 @@ from django.shortcuts import render
 
 from django.db import connection
 
-cursor=connection.cursor()
+
 
 
 # Create your views here.
@@ -16,19 +16,26 @@ cursor=connection.cursor()
 # 	return render(request, 'blog.html')
 
 
-def select_all(sql_name):
-	cursor.execute('select * from ' + sql_name )
+def select_all(sql_name,cursor):
+	cursor.execute('select * from ' + sql_name)
 	res=cursor.fetchall()
 	return res
 
 def index(request):
-	
-	liked_news = select_all("rightbox")
+	cursor=connection.cursor()
+	liked_news = select_all("rightbox",cursor)
 	print liked_news
-	newslist = select_all("news")
+	newslist = select_all("news",cursor)
 	# cursor.execute("UPDATE follow SET followid = 10 WHERE userid = '8' ")    
 	#transaction.commit_unless_managed()
 
 	# for i in res:
 	# 	print i.id
-	return render(request,'blog.html',{"newslist":newslist,"liked_news":liked_news})
+	cursor.close()
+	return render(request,'blog/blog.html',{"newslist":newslist,"liked_news":liked_news})
+
+def dongche(request):
+	cursor=connection.cursor()
+	newslist = select_all("news",cursor)
+	cursor.close()
+	return render(request,'blog/dongche.html',{"newslist":newslist})

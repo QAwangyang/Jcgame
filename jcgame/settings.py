@@ -25,7 +25,7 @@ SECRET_KEY = 'mcop@ikq=+1*jfg9m=v4zh)sd6#4y_+vp-p0$!*s1q5o3i#7le'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.1.104','localhost']
+ALLOWED_HOSTS = ["*",]
 
 
 # Application definition
@@ -55,7 +55,7 @@ ROOT_URLCONF = 'jcgame.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR+"./templates",], 
+        'DIRS': [BASE_DIR+"/templates",], 
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -121,6 +121,6 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
-
+STATIC_ROOT = '/static/'
 STATIC_URL = '/static/'
 STATICFILES_DIRS=(BASE_DIR,'static')

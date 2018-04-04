@@ -8,13 +8,23 @@ import json
 from django.db import connection
 import time
 
-cursor=connection.cursor()
+
+
+def is_connection_usable():
+	try:
+		cursor.connection.ping()
+		return True
+	except:
+		cursor=connection.close()
+		return False
+
 
 def cars(request):
-    return render(request, 'cars.html')
+
+	return render(request, 'cars.html')
 
 
-def user_status(x,ip,t,cd,sql_update):
+def user_status(x,ip,t,cd,sql_update,cursor):
 	
 	if(t==None):
 		t=0
@@ -26,11 +36,14 @@ def user_status(x,ip,t,cd,sql_update):
 
 def car_counts(request):
 
+	#print (is_connection_usable())
+
+	cursor=connection.cursor()
 
 	if request.POST:
 		multiple = request.POST['multiple']	#倍数
-		if multiple >10:
-			return
+		if int(multiple) >10:
+			return HttpResponse(0, content_type="application/json")
 		car_counts = tools.get_car_counts(int(multiple))   #查询了多少次
 		year_res = tools.get_car_year(car_counts) #年月
 		x=int(time.time()) #当前时间
@@ -48,7 +61,7 @@ def car_counts(request):
 			cursor.execute(sql_insert)
 			re_str="恭喜你<br/>"
 
-		elif(user_status(x,ip,res[0][5],720,sql_update)):  #if cold down
+		elif(user_status(x,ip,res[0][5],3600,sql_update,cursor)):  #if cold down
 			re_str="恭喜你<br/>"	
 
 		else:
@@ -60,7 +73,6 @@ def car_counts(request):
 
 			car_counts = res[0][3]
 			year_res = tools.get_car_year(car_counts)			
-			
 
 		re={
 			"year":year_res["year"],
@@ -68,6 +80,7 @@ def car_counts(request):
 			"str":re_str,
 			"multiple":multiple
 			}
+		cursor.close()
 
 	return  HttpResponse(json.dumps(re), content_type="application/json")
 
