@@ -39,3 +39,7 @@ def dongche(request):
 	newslist = select_all("news",cursor)
 	cursor.close()
 	return render(request,'blog/dongche.html',{"newslist":newslist})
+
+
+def ryb(request):
+	return render(request,'blog/RYB.html')

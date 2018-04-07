@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+
+
+{% block tittle %}
+
+  <title>Blog | 图说</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-siteapp"/>
+  <link rel="stylesheet" href="/static/assets/css/amazeui.css"/>
+  <link rel="stylesheet" href="/static/assets/css/event.css"/>
+
+{% endblock %}
+
+
+{% block mainbody %}
+
+
+<nav class="scrollspy-nav" data-am-scrollspynav="{offsetTop: 15,}" data-am-sticky>
+  <ul>
+    <li><a href="#about">事件简介</a></li>
+    <li><a href="#hot">事件热点</a></li>
+    <li><a href="#result">结果</a></li>
+    <li><a href="#influence">影响</a></li>
+  </ul>
+</nav>
+
+  <div class="am-u-md-8">
+      <article class="blog-main">
+        <h3 class="am-article-title blog-title">
+            <a href="#">红黄蓝幼儿园虐童事件</a>
+        </h3>
+        <h4 class="am-article-meta blog-meta"> posted on 2018-4-8 by wangyang thanks <a href="http://baike.baidu.com">百度百科</a>，<a href="http://baike.baidu.com">维基百科</a></h4>
+
+        <div class="am-g blog-content">
+             <!-- 关闭转义 -->  
+          <article data-am-widget="paragraph" class="am-paragraph am-paragraph-default" data-am-paragraph="{ tableScrollable: true, pureview: true }">
+            <div id="about" >
+              <p class=paragraph-default-p style="text-indent:2em">
+                 <span class="big_font">事件简介</span>2017年11月22日晚，北京市朝阳区管庄红黄蓝幼儿园（新天地分园）国际小二班十余名家长反映，孩子被老师用针扎、喂成分不明的白色药片，并提供了孩子身上多个针眼的照片。11月22日下午8名该班家长到管庄派出所报案。北京市公安局朝阳分局随即介入调查。23日此事经《新京报》等媒体报道后，各媒体争相报道此次事件。2017年11月26日晚，北京警方就该幼儿园幼儿疑似遭针扎、被喂药一事进行了通报，涉嫌虐童的幼儿园教师刘某某被刑拘。11月29日，红黄蓝教育机构针对红黄蓝新天地幼儿园事件发布道歉信。</p>
+                <img src="/static/assets/res/ryb/2.jpg">
+            </div>
+
+            <div id="hot" style="text-indent:2em">
+              <p class=paragraph-default-p>
+               <span class="big_font">事件热点</span>事件发生后，除媒体报道和家长发声外，11月23日互联网上还出现许多传言，短时间内形成舆论热点，引发网民关注和愤慨，据统计在事发地北京消息传播最广。BBC中文网评论称，因涉事幼儿园属费用昂贵的高端园，事件引发中产阶级愤怒和担忧，许多人开始认为幼儿园即便收费高也难以信任。23日早间报道后不久，部分报道一度被删除，但不久新华网、人民网等媒体转载了相关报道并跟进。</p>
+              <p>
+                其中，校方态度被广大网友嗤之以鼻，事件发生的第一时间，幼儿园园长向媒体告知，对诬告陷害行为已报案。名人马未都公众号认为“该声明择词闪烁，避重就轻”。中国网评论员文章认为“声明不但没有疏缓情绪，反而加剧了对立情绪”。随后，以事发校区家长身份的微博以及微信传言，开始大量在互联网传播，如“老虎团”官兵猥亵幼儿，“警方故意损坏摄像头”等问题，一时间谣言四起，院方的态度也十分不令人满意。
+              </p>
+              <p>
+                2017年11月23日教育部称对近期网曝个别幼儿园“虐童”现象高度重视，已责成地方有关部门立即调查。24日国务院教育督导委员会办公室紧急部署立即在全国开展幼儿园规范办园行为专项督导检查。11月25日北京市教委根据公安机关通报的案件侦办情况，强烈谴责涉案人员严重违反师德的行为，坚决支持依法依规惩处，要求相关区、园配合司法机关严肃处理并立即整改。
+              </p>
+              <p>
+                朝阳区人民政府也责成举办者按程序立即免除园长职务。26日北京市教委要求各区立即为每所幼儿园配一位责任督学，各园要增设摄像头，住宿幼儿园要装夜视摄像头，与公安局联网实现监控全覆盖，部分幼儿园专设人工监控室。同日国防部新闻局局长、新闻发言人吴谦在例行记者会上就此事件涉军负面舆论表示，不允许任何人以任何方式诋毁解放军，并表示孩子是祖国的花朵，是国家的未来，不允许任何人以任何方式伤害。
+              </p> 
+              <img src="/static/assets/res/ryb/1.jpg" >
+            </div>
+
+            <div id="result" style="text-indent:2em" >
+              <p><span class="big_font">事件结果：</span>
+              朝阳区警方通报，涉事教师刘某某（女，22岁，河北籍）因部分儿童不按时睡觉而用缝衣针扎“管教”，因涉嫌虐待被看护人罪已被刑拘。
+              朝阳区纪委、区监委对朝阳区教委主任肖汶、副主任付琳（因存在对民办教育机构监管缺失问题）、朝阳区教委社会力量办学管理科科长韩斌（因工作中存在失察失责、履职不到位问题）予以立案调查。
+
+              <p>①编造“老虎团”人员“群体猥亵幼童”等谣言的刘某（女，31岁，北京籍）因扰乱社会秩序被行政拘留，李某某（女，29岁，河北省人）被公安机关批评教育后26日已在个人微博致歉（26日有自称“红黄蓝造谣家长”的网友在微博就将“老虎团”与事件联系起来并传播一事道歉，部分知名转发者亦微博道歉）。</p>
+
+              <p>②11月25日的通报还称，编造孟亮是孟建柱儿子谣言的金某（上海某影视公司总经理，上海宝山人，现居北京）已被警方依法查处、教育训诫，对造谣传谣行为均深刻忏悔并写下悔过书。</p>
+
+              <p>③11月28日的通报称未发现有人对幼儿实行侵害行为，23日报道的“喂药”一事为幼儿家长苟某（男，28岁，四川人）诱导询问幼儿摄成的视频，电视台记者刘某（男，36岁，北京人）未经核实直接从网上下载编发；“爷爷医生、叔叔医生脱光衣物检查女儿身体”的言论为赵某某（女，31岁，黑龙江人）编造，其已承认并愿向社会澄清事实公开道歉。</p>
+
+              <p>④11月28号的通报还称涉事班级监控视频存储硬盘有损坏，系该园库管员赵某某（女，45岁，河南省人，住在监控室）感觉监控设备噪音大，经常放学后将设备强制断电所致，已恢复的约113小时视频中未发现有人对儿童实施侵害。</p>
+
+              <p>
+              11月25日，红黄蓝教育机构声明称“对于新天地幼儿园教师刘某某涉嫌违法犯罪的行为，感到无比震惊、痛心疾首；对此次事件中涉及的孩子、家庭及社会各界表示深深歉意。这是我们在管理上的重大失职，我们必须承担责任，深刻反思，彻底调查整改。”11月29日晨又发布道歉信称“倍感难过和耻辱，向孩子们和大家深深道歉”，将全面升级幼儿园监控系统，透明办园。
+              </p>
+
+              </p>
+              <p>
+              <img src="/static/assets/res/RYB/3.jpg"/>
+            </div> 
+
+            <div id="influence" style="text-indent:2em" >  
+            <p><span class="big_font">事故影响</span>红黄蓝教育集团受本次事件影响，赴美上市不足2月的红黄蓝股价大跌。当地时间11月25日收盘，红黄蓝（NYSE:RYB）暴跌38.41%，报16.45美元，跌破发行价18.5美元，市值缩水约2.9亿美元，折合人民币接近19.4亿元</p>
+            <p>今日回头看往事，流言四起时，我们无法真正擦亮自己的双眼，只能去相信网上虚假的负面报道，然后在自己朋友圈或者微博上转载谩骂一通。红黄蓝事件本身，是由于个别人渣幼教，在对待孩子问题上，表现出的极不耐心和虐待行为，本应得到快速合理的解决，而不应该成为让广大家长对幼儿园“谈幼色变”的社会热点。我们作为普通公民，不奢望每个行业都100%的干净，安全，但是当事件发生后，我们也希望企业和政府第一时间发布权威消息，不仅仅是报喜不报忧，不仅仅是告诉我们事情的进度，我们需要的是事实而已。</p>
+            <p>愿受伤害的孩子们忘记发生的这些事情，大人们会努力保护好你们</p>
+            <img src="/static/assets/res/RYB/5.jpg"/>
+            </div> 
+
+        </article>
+<!--             {% autoescape off %}   
+              {{list.2}}
+            {% endautoescape %} -->
+            <p style="text-align:center">本文中所有信息来源均可通过互联网所查，本网站不保证来源的准确性</p>
+    </article>
+
+
+    <hr class="am-article-divider blog-hr">
+    <ul class="am-pagination blog-pagination">
+      <li class="am-pagination-next"><a href="http://cars.jcgame.net">下一页 &raquo;</a></li>
+    </ul>
+  </div>
+
+{% endblock %}
+
