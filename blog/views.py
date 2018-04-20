@@ -21,11 +21,17 @@ def select_all(sql_name,cursor):
 	res=cursor.fetchall()
 	return res
 
+def select_order_by(sql_name,by_name,cursor):
+	cursor.execute('select * from ' + sql_name +' order by '+ by_name + " desc")
+	res=cursor.fetchall()
+	return res
+
 def index(request):
 	cursor=connection.cursor()
 	liked_news = select_all("rightbox",cursor)
 	print liked_news
-	newslist = select_all("news",cursor)
+	newslist = select_order_by("news","time",cursor)
+	print newslist
 	# cursor.execute("UPDATE follow SET followid = 10 WHERE userid = '8' ")    
 	#transaction.commit_unless_managed()
 
