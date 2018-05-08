@@ -30,7 +30,7 @@ def index(request):
 	cursor=connection.cursor()
 	liked_news = select_all("rightbox",cursor)
 	print liked_news
-	newslist = select_order_by("news","time",cursor)
+	newslist = select_order_by("blog_news","time",cursor)
 	print newslist
 	# cursor.execute("UPDATE follow SET followid = 10 WHERE userid = '8' ")    
 	#transaction.commit_unless_managed()
@@ -42,7 +42,7 @@ def index(request):
 
 def dongche(request):
 	cursor=connection.cursor()
-	newslist = select_all("news",cursor)
+	newslist = select_all("blog_news",cursor)
 	cursor.close()
 	return render(request,'blog/dongche.html',{"newslist":newslist})
 
