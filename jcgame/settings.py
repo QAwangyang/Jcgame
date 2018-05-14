@@ -64,6 +64,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -111,21 +112,22 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
-STATIC_ROOT = '/static/assets/'
-STATIC_URL = '/static/assets/'
+STATIC_ROOT = '/static/assets/pic/'
+STATIC_URL = '/static/'
 STATICFILES_DIRS=(BASE_DIR,'static')
 
 
-MEDIA_URL='/static/'
-MEDIA_ROOT=os.path.join(BASE_DIR, '/static/')
+MEDIA_URL='/upload/'
+#MEDIA_ROOT = '/static/assets/pic/'
+MEDIA_ROOT=os.path.join(BASE_DIR, 'upload')
