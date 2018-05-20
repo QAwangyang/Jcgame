@@ -9,37 +9,80 @@
   <meta name="format-detection" content="telephone=no">
   <meta name="renderer" content="webkit">
   <meta http-equiv="Cache-Control" content="no-siteapp"/>
-  <link rel="alternate icon" type="image/png" href="/static/assets/i/favicon.png">
-  <link rel="stylesheet" href="/static/assets/css/amazeui.min.css"/>
+  <link rel="stylesheet" href="/static/assets/css/amazeui.css"/>
+  <link rel="stylesheet" href="/static/assets/css/event.css"/>
 
 {% endblock %}
 
 
 {% block mainbody %}
 
-<div class="am-g am-g-fixed blog-g-fixed">
+
+<nav class="scrollspy-nav" data-am-scrollspynav="{offsetTop: 15,}" data-am-sticky>
+  <ul>
+    <li><a href="#about">事件简介</a></li>
+    <li><a href="#hot">事件热点</a></li>
+    <li><a href="#result">结果</a></li>
+    <li><a href="#influence">影响</a></li>
+  </ul>
+</nav>
+
   <div class="am-u-md-8">
-  {% for list in newslist %}
-        <article class="blog-main">
-          <h3 class="am-article-title blog-title">
-            <a href="#">{{list.1}} </a>
-          </h3>
-          <h4 class="am-article-meta blog-meta"> posted on {{list.4}} by wangyang thanks <a href="http://baike.baidu.com">百度百科</a></h4>
+      <article class="blog-main">
+        <h3 class="am-article-title blog-title">
+            <a href="#">7.23温州动车事故 </a>
+        </h3>
+        <h4 class="am-article-meta blog-meta"> posted on 2018-4-4 by wangyang thanks <a href="http://baike.baidu.com">百度百科</a>，<a href="http://baike.baidu.com">维基百科</a></h4>
 
-          <div class="am-g blog-content">
-            <div class="am-u-lg-7">  <!-- 关闭转义 -->
-            {% autoescape off %}   
-              {{list.2}}
-            {% endautoescape %}
+        <div class="am-g blog-content">
+             <!-- 关闭转义 -->  
+          <article data-am-widget="paragraph" class="am-paragraph am-paragraph-default" data-am-paragraph="{ tableScrollable: true, pureview: true }">
+            <div id="about" >
+              <p class=paragraph-default-p style="text-indent:2em">
+                7.23事件又称<a href=https://zh.wikipedia.org/wiki/2011%E5%B9%B4%E7%94%AC%E5%8F%B0%E6%B8%A9%E9%93%81%E8%B7%AF%E5%88%97%E8%BD%A6%E8%BF%BD%E5%B0%BE%E4%BA%8B%E6%95%85>7·23甬温线特别重大铁路交通事故</a>，2011年7月23日20时30分05秒，甬温线浙江省温州市境内，由北京南站开往福州站的D301次列车与杭州站开往福州南站的D3115次列车发生动车组列车追尾事故。此次事故已确认共有六节车厢脱轨，即D301次列车第1至4位，D3115次列车第15、16位。中断行车32小时35分，直接经济损失19371.65万元。根据官方公布的名单，此次事故共造成40人死亡，至少192人受伤。此次事故遇难者赔偿标准为91.5万元人民币，包括死亡赔偿金、丧葬费及精神抚慰费和一次性救助金赔偿。</p>
+                <img src="/static/assets/res/dongche/1.png">
             </div>
-            <div class="am-u-lg-5">
-              <p><img src={{list.3}} ></p>
+
+            <div id="hot" style="text-indent:2em">
+              <p class=paragraph-default-p>
+               <span class="big_font">事件热点</span>事故发生后，许多媒体提出<b>①搜救行动是否过早结束</b>、<b>②恢复通车是否过急</b>、<b>③坠地的后车车头被迅速掩埋</b>、<b>④政府控制媒体和司法系统</b>以及<b>⑤越早签订赔偿协议得到更多赔偿</b>等问题，这一系列行为被社交媒体传开后，社会舆论广为关注与批评，也致使事故原因被大量猜测，雷电说，人为调度失误说，司机失误说，信号控制系统故障说等事故说法在调查结论出来前，被大量传播。</p>
+              <img src="/static/assets/res/dongche/2.png" >
+              <p>
+                其中，<span class="big_font">车体掩埋</span>问题被媒体和群众大量质疑，有媒体称，当局在次日早上开始迫不及待清理现场，用铲车将坠落车厢碎片碾压后挖坑就地掩埋。亦有新闻称这是由于四节坠地车厢因体积太大，无法运出现场。此举引发民众激烈反应，认为车厢中可能还有幸存人员、遇难者遗体及遗物，并认为此举是为“毁尸灭迹”，试图掩盖事件真相，毁灭问责证据。时任国家铁道部新闻发言人王勇平也因“不管你们信不信，反正我信了”被媒体推向风口浪尖。
+              </p>
+              <p>
+                随后中铁三局人士称并未掩埋车厢，而是为大型起重机入场腾出空间。铁道部也称事故车厢将集体运走，而非就地掩埋。另外，有央视记者称追尾事故现场并未挖坑。随后，铁道部发言人王勇平又承认确实掩埋车头，称是为后续救援车辆提供有利地形条件。而香港资深工程师樊绍基指，在事故现场附近大片空地，其实只要将车厢挪开便可，根本毋须挖坑。
+              </p>
+              <p>
+                7月25日晚，追尾事故列车被肢解后移送至温州西站作调查。为减少特大件运输对温州市市内交通的影响，事故车辆运输安排在7月25日夜间进行[88]。同日，凤凰网推出一项关于动车组列车追尾事故处理的民意调查。17%的网友对事故处理满意，另有超半数网友认为现场处理过快，可能造成乘客物品遗失，事故原因难以查明。调查还显示超六成网友认为应重新检讨铁路安全保障体系。
+              </p>
+              <p>
+                7月26日，被埋于现场高架桥下的车头被挖出。《日本时事通信》认为，铁道部当局此举可能是为了显示重视追查原因的姿态。7月27日，国务院应急管理专家组专家刘铁民在接受中国中央电视台《经济半小时》栏目专访时，在得知已经掩埋的车头已经又被挖出来运走检查时直言不讳地称“难以置信，我不敢相信这是真的，这个要出大笑话的，如果这样做的话。”7月29日，事故现场除之前曾用来掩埋出事列车的坑洞仍被木板围封外，其他地方均已解封，不少附近村民有组织地到现场捡拾挖走未运走的列车残骸和零部件并变卖。最终调查报告显示，上海铁路局常务副局长王峰（事故发生后负责指挥桥下救援工作）曾有意就地挖坑掩埋受损车头和散落部件，张德江到场后及时阻止。
+              </p>
+              <img src="/static/assets/res/dongche/3.png" />
             </div>
-          </div>
+
+            <div id="result" style="text-indent:2em" >
+            <p><span class="big_font">事件结果：</span>经调查认定，“7·23”甬温线特别重大铁路交通事故是一起因列控中心设备存在严重设计缺陷、上道使用审查把关不严、雷击导致设备故障后应急处置不力等因素造成的责任事故。在事故抢险救援过程中，国家铁道部和上海铁路局存在处置不当、信息发布不及时、对社会关切回应不准确等问题，在社会上造成不良影响。</p>
+            <p><b>赔偿</b>：经过多次讨论，与遇难家属协商，“7·23”事故遇难人员赔偿救助金主要包括死亡赔偿金、丧葬费及精神抚慰费和一次性救助金（含被抚养人生活费等），合计赔偿救助金额91.5万元。且动车事故受伤旅客的全部医疗费一律实报实销，不存在从赔偿款中扣除医疗费的问题</p>
+            <p><b>追责</b>：铁道部原部长刘志军、原副总工程师兼运输局局长张曙光对事故发生负有主要领导责任，因涉嫌严重违纪违法问题，另案一并处理。国家铁道部副部长陆东福，国家铁道部总工程师何华武,给予记过处分；国家铁道部运输局原副局长兼客运专线技术部主任记季学胜,国家铁道部运输局原副局长兼基础部主任徐啸明,通信信号集团公司副总经理、党委常委缪伟忠,上海铁路局原局长、党委副书记龙京,撤职、撤销党内职务处分；上海铁路局原党委书记李嘉撤销党内职务处分;给予国家铁道部科技司原司长耿志修降级、党内严重警告处分。（下图左刘志军，右张曙光，刘志军2011年被判死缓，2013年改为无期徒刑；张曙光于2014年被判死缓，2017年改为无期徒刑。）</p>
+            <p>
+            <img src="/static/assets/res/dongche/5.png"/>
+
+            </div> 
+
+            <div id="influence" style="text-indent:2em" >  
+            <p><span class="big_font">事故影响</span>根据《高铁风云录》披露，事故发生后，中国高铁在舆论界成为过街老鼠人人喊打，有人把“CRH”解释成“耻辱号”或者“吃人号”；甚至有人造谣说高铁有辐射，乘务员会不孕不育，经常有大批的乘务员辞职。银行限贷，高铁降速，部长落马等等措施让人们怀疑高速铁路发展是否只是面子工程，是豆腐渣工程。中国高铁线路由于限贷，资金接近枯竭，大量线路停工，大批农民工被迫返乡，中国高铁几近被扼杀。</p>
+            <p>今日回头看往事，当初事故出现，并不是因为高铁快而追尾，在高铁高速发展的过程中，存在以次充好，急功近利的现象，事故发生的甬台温铁路是时速200公里的客货共线，根本达不到中国高速铁路（250公里）的定义标准，所有被漠视的细节问题，导致了最后的悲剧发生，愿此次事故逝者安息</p>
+            <img src="/static/assets/res/dongche/4.png"/>
+            </div> 
+
         </article>
-  {%endfor%}
-
-    <hr class="am-article-divider blog-hr">
+<!--             {% autoescape off %}   
+              {{list.2}}
+            {% endautoescape %} -->
+            <p style="text-align:center">本文中所有信息来源均可通过互联网所查，本网站不保证来源的准确性</p>
+    </article>
 
 
     <hr class="am-article-divider blog-hr">

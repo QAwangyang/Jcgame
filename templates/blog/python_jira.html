@@ -1,0 +1,175 @@
+{% extends "base.html" %}
+
+
+{% block tittle %}
+
+  <title>Blog | 图说</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-siteapp"/>
+  <link rel="stylesheet" href="/static/assets/css/amazeui.css"/>
+  <link rel="stylesheet" href="/static/assets/css/event.css"/>
+
+{% endblock %}
+
+
+{% block mainbody %}
+
+
+<nav class="scrollspy-nav" data-am-scrollspynav="{offsetTop: 15,}" data-am-sticky>
+  <ul>
+    <li><a href="#about">jira库简介及使用场景</a></li>
+    <li><a href="#hot">使用方法</a></li>
+    <li><a href="#result">常用api</a></li>
+    <li><a href="#influence">常见问题及解决办法</a></li>
+  </ul>
+</nav>
+
+  <div class="am-u-md-8">
+      <article class="blog-main">
+        <h3 class="am-article-title blog-title">
+            <a href="#">python强大的jira库介绍及使用方法 </a>
+        </h3>
+        <h4 class="am-article-meta blog-meta"> posted on 2018-5-19 by wangyang thanks <a href="http://www.wolaifan.cn">我来翻</a>，<a href="http://baike.baidu.com">维基百科</a></h4>
+
+        <div class="am-g blog-content">
+             <!-- 关闭转义 -->  
+          <article data-am-widget="paragraph" class="am-paragraph am-paragraph-default" data-am-paragraph="{ tableScrollable: true, pureview: true }">
+            <div id="about" >
+              <p class=paragraph-default-p style="text-indent:2em">
+                <span class="big_font">场景及简介</span>自动化测试之后，发现的bug怎么办？当然是需要自动的提交bug。python的jira库就可以让有这些想法的人轻松满足这一切。使用场景可以为selenium+jira的架构模式，在游戏行业也可以为网易airtest（ <a href=https://github.com/AirtestProject/AirtestIDE>git地址</a> ）+游戏客户端+测试平台+jira的架构模式，即游戏客户端在自动化测试过程中，通过airtest发送bug等崩溃错误信息（也可以让debug模式下的游戏自动发送错误）到测试平台，测试平台收集bug和错误后，去重再发送到jira。当然，从excel导个bug到jira等等功能基本都可以通过jira的api实现。
+                文档地址：<a href=http://jira.readthedocs.io/en/master>jira官方文档地址</a> 
+              </p>
+            </div>
+
+            <div id="hot" style="text-indent:2em">
+              <p class=paragraph-default-p>
+               <span class="big_font">使用方法</span>使用2.7.10以上的jira版本安装<code>pip install jira</code>
+              <p>
+                <pre><code class="python">
+#批量将bug上传jira
+from jira import JIRA
+class report_bugs(object):
+    def init_bugs(self):
+      issue_list = []
+      buginfo_result = gl.GL_DB.query(buginfo_sql)  #buginfo_sql为数据库中每个错误的项目名，版本号，设备信息。
+      for info in buginfo_result:
+        issue = {
+                'project': {'key': jira_name},  #jira_name为项目在jira中的名字或者key
+                'summary': "[" + str(v5.1) + "]版本崩溃平台反馈bug", #标题
+                'description': str(info.dumpinfo)+"\n第二行"  #缺陷描述，这里为崩溃内容
+                'issuetype': {'name': 'Bug'},   #类型，一般还有task等。
+                'assignee': {'name': wjc}, #bug被指向的人
+                'fixVersions': [{'name': "v1.0"}], #jira在项目下的版本号
+                }
+
+        issue_list.append(issue)
+      return issue_list
+
+def POST(self):
+    issue_list = self.init_bugs()
+    jira = JIRA(server='http://192.168.8.108:8888', basic_auth=('wy', 'test')) #实例化jira对象
+    issues = jira.create_issues(field_list=issue_list)  #提交bug  可以是list形式（推荐）
+    if(issues[0]['error']):
+       return issues[0]['error']
+    else:
+        return 0
+                </code></pre>
+
+            <div id="result" style="text-indent:2em" >
+            <p><span class="big_font">常用api</span></p>
+            <P>修改bug</p>
+            <pre><code class="python">
+
+issue = jira.issue('JIRA-1000')  #得知道bugid才行
+issue.update(versions=[{"name":'V1.1'}])
+issue.update(summary='Hello World', description='Hello World')
+issue.update(assignee={'name': 'wjc'}) 
+
+或者列表批量修改
+issue_dict= {
+    'versions': '1.v',
+    'description': 'i描述\n第二行',
+}
+issue.update(fields=issue_dict)
+            </code></pre>
+            <p>查询bug，可以利用jira的jQL来查</p>
+            <pre><code class="python">
+
+issues_in_proj = jira.search_issues('project=test_PROJ and assignee = currentUser()')  
+#查询自己的bug（括号里是jira的系统里的筛选条件，复制过来就行）
+
+for issue in jira.search_issues('reporter = currentUser() order by created desc', maxResults=3):  #查询自己最后3个bug
+    print('{}: {}'.format(issue.key, issue.fields.summary))
+
+            </code></pre>
+
+            <p>创建issues时，部分可使用的方法</p>
+            <pre class="am-pre-scrollable">
+
+issue.fields.aggregateprogress
+issue.fields.aggregatetimeestimate
+issue.fields.aggregatetimeoriginalestimate
+issue.fields.aggregatetimespent
+issue.fields.assignee
+issue.fields.attachment
+issue.fields.comment
+issue.fields.components
+issue.fields.created
+issue.fields.issuetype
+issue.fields.labels
+issue.fields.priority
+issue.fields.progress
+issue.fields.project
+issue.fields.reporter
+issue.fields.resolution
+issue.fields.resolutiondate
+issue.fields.status
+issue.fields.subtasks
+issue.fields.summary
+issue.fields.timeestimate
+issue.fields.timeoriginalestimate
+issue.fields.timespent
+issue.fields.updated
+issue.fields.versions
+issue.fields.votes
+issue.fields.watches
+issue.fields.workratio
+issue.fields.description
+issue.fields.environment
+issue.fields.fixVersions
+issue.fields.issuelinks
+
+#创建bug时的用法
+issue_dict= {
+    'priority': {'name': 'Major'},
+    'fixVersions': [{'name': "v1.0"}],
+    'components':[{'name': '一个模块'}],  #中括号不能少
+}
+            </pre>
+
+            </div> 
+
+            <div id="influence" style="text-indent:2em" >  
+            <p><span class="big_font">常见问题及解决办法</span>            
+            <p>问题1：pip安装jira 提示tsl1版本过低</p>
+            <p>解决：升级python到2.7.11以上</p>
+            <p>问题2：暂时还没遇到</p>
+            <p>解决：遇到再说吧，可以去<a href=http://www.wolaifan.cn/question/> 我来翻--知否</a> 提问</p>
+            </div> 
+
+        </article>
+            <p style="text-align:center">原创内容，欢迎转载</p>
+    </article>
+
+
+    <hr class="am-article-divider blog-hr">
+    <ul class="am-pagination blog-pagination">
+      <li class="am-pagination-next"><a href="http://cars.jcgame.net">下一页 &raquo;</a></li>
+    </ul>
+  </div>
+
+{% endblock %}
+

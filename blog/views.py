@@ -49,3 +49,6 @@ def dongche(request):
 
 def ryb(request):
 	return render(request,'blog/RYB.html')
+
+def python_jira(request):
+	return render(request,'blog/python_jira.html')
