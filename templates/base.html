@@ -92,9 +92,9 @@
           事件 <span class="am-icon-caret-down"></span>
         </a>
         <ul class="am-dropdown-content">
-          <li class="am-dropdown-header"><a href="http://blog.jcgame.net/blog/dongche">7.23动车事件</a></li>
+          <li class="am-dropdown-header"><a href="/blog/dongche">7.23动车事件</a></li>
           <li class="am-dropdown-header"><a href="#">天津滨海爆炸事件</a></li>
-          <li class="am-dropdown-header"><a href="http://blog.jcgame.net/blog/honghuanglan">红黄蓝事件</a></li>
+          <li class="am-dropdown-header"><a href="/blog/honghuanglan">红黄蓝事件</a></li>
         </ul>
       </li>
       <li class="am-dropdown" data-am-dropdown>
@@ -112,7 +112,7 @@
           小技巧 <span class="am-icon-caret-down"></span>
         </a>
         <ul class="am-dropdown-content">
-          <li class="am-dropdown-header"><a href="http://blog.jcgame.net/blog/python_jira">python的jira库使用场景及方法</a></li>
+          <li class="am-dropdown-header"><a href="/blog/python_jira">python的jira库使用场景及方法</a></li>
           <li class="am-dropdown-header"><a href="#">cocos引擎客户端性能测试杂感</a></li>
           <li class="am-dropdown-header"><a href="#">排序算法与时间复杂度</a></li>
         </ul>
@@ -208,6 +208,21 @@
 <script src="/static/assets/js/jquery.min.js"></script>
 <!--<![endif]-->
 <script src="/static/assets/js/amazeui.min.js"></script>
+
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https'){
+   bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+  bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
 
 </body>
 </html>

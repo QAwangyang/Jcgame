@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blog',
     'cars',
+    'ckeditor',
 ]
 
 MIDDLEWARE = [
@@ -123,9 +124,11 @@ USE_TZ = False
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
-STATIC_ROOT = '/static/assets/pic/'
+STATIC_ROOT = '/static/'
 STATIC_URL = '/static/'
 STATICFILES_DIRS=(BASE_DIR,'static')
+
+CKEDITOR_JQUERY_URL ='/static/assets/js/jquery.min.js'
 
 
 MEDIA_URL='/upload/'
