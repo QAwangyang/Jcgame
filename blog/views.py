@@ -52,3 +52,6 @@ def ryb(request):
 
 def python_jira(request):
 	return render(request,'blog/python_jira.html')
+
+def cocos_performance(request):
+	return render(request,'blog/cocos_performance.html')
