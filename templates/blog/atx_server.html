@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+
+
+{% block tittle %}
+
+  <title>图说 | atx-server</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-siteapp"/>
+  <link rel="stylesheet" href="/static/assets/css/amazeui.css"/>
+  <link rel="stylesheet" href="/static/assets/css/event.css"/>
+
+{% endblock %}
+
+
+{% block mainbody %}
+
+
+<nav class="scrollspy-nav" data-am-scrollspynav="{offsetTop: 15,}" data-am-sticky>
+  <ul>
+    <li><a href="#about">atx-server简介</a></li>
+    <li><a href="#hot">部署流程</a></li>
+    <li><a href="#result">使用方法</a></li>
+    <li><a href="#influence">常见问题及解决办法</a></li>
+  </ul>
+</nav>
+
+  <div class="am-u-md-8">
+      <article class="blog-main">
+        <h3 class="am-article-title blog-title">
+            <a href="#">安卓多设备集群管理工具atx-server</a>
+        </h3>
+        <h4 class="am-article-meta blog-meta"> posted on 2018-7-3 by wangyang thanks <a href="http://www.wolaifan.cn">我来翻</a>，<a href="https://testerhome.com">测试之家</a></h4>
+
+        <div class="am-g blog-content">
+             <!-- 关闭转义 --> 
+          <article data-am-widget="paragraph" class="am-paragraph am-paragraph-default" data-am-paragraph="{ tableScrollable: true, pureview: true }">
+            <div id="about" >
+              
+              <span>二话不说，先上效果图</span>
+              <img src="/static/assets/res/atx_server/clipboard.png">
+              <p class=paragraph-default-p style="text-indent:2em">设备多了之后，总会有一些测试机需要来回借，并且人多眼杂，无法统一管理，自从有了atx-server之后，情况大有改观，<a href=https://github.com/openatx/atx-server>atx_server git地址</a>如上图所示，所有设备清晰明了，可以远程访问，速度也还凑合，作为开源项目，最好的就是可以自己订制，所以非常推荐 
+              </p>
+            </div>
+
+            <div id="hot" style="text-indent:2em">
+              <p class=paragraph-default-p>
+               <span class="big_font">部署流程：</span>使用2.7.10以上的python版本安装，推荐使用mac和linux，Windows当然也可以，先说mac和linux的吧</p>
+               <code>brew install go  #装go语言  </code></br>
+               <code>brew install rethinkdb #装数据库  </code></br>
+               <code>go get -v github.com/openatx/atx-server</code></br></br>
+
+               <code>#安装下载完毕后，在mac上找到user目录下的go目录</br>
+                     cd go/src/github.com/openatx/atx-server</br>
+                     go build</code></br></br>
+
+               <code>#build 成功后就可以启动server了</br>
+                    rethinkdb --http-port 8090 --bind all  启动数据库8090端口</code></br>
+               <code>  #启动atx-server</br>
+                        cd /Users/go/src/github.com/openatx/atx-server </br>  
+                        ./atx-server --port 8000</code> </br>  </br>
+
+               <span>如果一切正常，是可以访问ip:8000的，如192.168.1.100:8000</br>
+               接下来需要安装uiautomator2库和客户端的agent，手机需要连数据线到电脑</span></br> 
+
+               <code>#服务器安装  pip install  --pre --upgrade uiautomator2   </code></br>
+               <code>#手机设备安装  python -m uiautomator2 init 192.168.1.100:8000  </code></br></br>
+
+               <span>全部安装完毕后，刷新刚才的192.168.1.100:8000就可以看到设备了</span></br> 
+
+            </div>
+
+            <div id="result" style="text-indent:2em" >
+            <p><span class="big_font">使用方法:</span></p>
+            <span>1.远程连接设备</span></br>
+            <code>点击主界面use即可，会跳转到新开的设备分页中</code></br></br>
+            <span>2.远程安装apk</span></br>
+            <code>a.点击上传apk，等待上传完毕</br>
+                  b.点击终端控制台进入设备cmd模式</br>
+                  c.cd /sdcard/tmp </br>
+                  d.pm -r install com.xxx.apk
+            </code></br>
+            <img src="/static/assets/res/atx_server/phone_main.png">
+            <img src="/static/assets/res/atx_server/adb.png">
+
+  
+            </div> 
+
+            <div id="influence" style="text-indent:2em" >  
+            <p><span class="big_font">常见问题</span>            
+            <p>问题1：pip安装uiautomator2 提示安装失败</p>
+            <p>解决：升级python到2.7.11以上</p>
+            <p>问题2：brew 安装go或者数据库时，提示没有权限</p>
+            <p>解决：报错中有提示，可以按照报错中的要求进行安装。sudo 是不行的。</p>
+            <p>还有问题可以去<a href=http://www.wolaifan.cn/question/> 我来翻--知否</a> 提问</p>
+            <img src="/static/assets/res/cocos/huahua.jpg"/>
+            </div> 
+
+        </article>
+            <p style="text-align:center">原文地址如下：<a href=https://testerhome.com/topics/11588>atx-server</p>
+    </article>
+
+
+    <hr class="am-article-divider blog-hr">
+    <ul class="am-pagination blog-pagination">
+      <li class="am-pagination-next"><a href="http://cars.jcgame.net">下一页 &raquo;</a></li>
+    </ul>
+  </div>
+
+{% endblock %}
+

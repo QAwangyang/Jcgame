@@ -55,3 +55,6 @@ def python_jira(request):
 
 def cocos_performance(request):
 	return render(request,'blog/cocos_performance.html')
+
+def atx_server(request):
+	return render(request,'blog/atx_server.html')
