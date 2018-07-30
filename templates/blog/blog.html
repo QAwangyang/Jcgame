@@ -10,8 +10,6 @@
   <meta name="format-detection" content="telephone=no">
   <meta name="renderer" content="webkit">
   <meta http-equiv="Cache-Control" content="no-siteapp"/>
-  <link rel="stylesheet" href="/static/assets/css/amazeui.css"/>
-  <link rel="stylesheet" href="/static/assets/css/event.css"/>
 
 {% endblock %}
 
@@ -39,16 +37,59 @@
         </article>
   {%endfor%}
 
-    <hr class="am-article-divider blog-hr">
-
-
+<!--     <hr class="am-article-divider blog-hr">
     <hr class="am-article-divider blog-hr">
     <ul class="am-pagination blog-pagination">
       <li class="am-pagination-next"><a href="http://cars.jcgame.net">下一页 &raquo;</a></li>
-    </ul>
+    </ul> -->
   </div>
 
+
+<script>
+    var page_num =0
+    var slow = true
+    $(window).scroll(function() {
+        if ($(document).scrollTop() >= $(document).height() - $(window).height()) {   //判断是否已经滚动到页面底部；
+            page_num+=1
+            console.log("come input")
+            //$("#loading").css("display", "block");                                                            //切换正在加载的数据的图片状态为显示；
+            jQuery.ajax({
+            type:"POST",
+            url:"/blog/get_more_news",
+            async:true,
+            dataType:"json",
+            data:{"page_num":page_num},                                                                                
+                success: function(data) {                                                                         
+                    var str = ""                                                                                         
+                    $.each(data, function(i, item) {
+                      console.log(item.date)
+                             str += "<article class='blog-main'>"
+                             str += "<h3 class='am-article-title blog-title'>"
+                             str += "<a href='#''>"+item.title+"</a>"
+                             str += "</h3>"
+                             str +="<h4 class='am-article-meta blog-meta'> posted on " + item.date +" by wangyang thanks <a href='http://baike.baidu.com'>百度百科</a></h4>"
+                            str += "<div class='am-g blog-content'><div class='am-u-lg-7'> {% autoescape off %}"+item.body+"{% endautoescape %}</div>"
+                            str +="<div class='am-u-lg-5'><p><img src='{{MEDIA_URL}}'"+item.pic_name+" ></p></div></div></article>"    
+                    });
+                    $(".am-u-md-8").append(str);
+
+                    if (slow==true){
+                      if(data.length<=5){
+                        slow=false
+                        var strlow = "" 
+                      strlow+="<hr class='am-article-divider blog-hr'><hr class='am-article-divider blog-hr'><ul class='am-pagination blog-pagination'>"
+                      strlow+="<li class='am-pagination-next'><a href='http://cars.jcgame.net'>模拟摇号 &raquo;</a></li></ul>"
+                    $(".am-u-md-8").append(strlow);
+                    }   
+                    }                                          
+                }
+            });
+        }
+    });        
+</script>
 {% endblock %}
+
+
 
 
 

@@ -2,9 +2,9 @@
 from __future__ import unicode_literals
 
 from django.shortcuts import render
-
+from django.http import HttpResponse
 from django.db import connection
-
+import json
 
 
 
@@ -21,8 +21,8 @@ def select_all(sql_name,cursor):
 	res=cursor.fetchall()
 	return res
 
-def select_order_by(sql_name,by_name,cursor):
-	cursor.execute('select * from ' + sql_name +' order by '+ by_name + " desc")
+def select_order_by(sql_name,by_name,cursor,init,count):
+	cursor.execute('select * from ' + sql_name +' order by '+ by_name + " desc limit "+ init+","+count)
 	res=cursor.fetchall()
 	return res
 
@@ -30,15 +30,35 @@ def index(request):
 	cursor=connection.cursor()
 	liked_news = select_all("rightbox",cursor)
 	print liked_news
-	newslist = select_order_by("blog_news","time",cursor)
+	newslist = select_order_by("blog_news","time",cursor,"0","5")
 	print newslist
 	# cursor.execute("UPDATE follow SET followid = 10 WHERE userid = '8' ")    
 	#transaction.commit_unless_managed()
 
-	# for i in res:
-	# 	print i.id
 	cursor.close()
 	return render(request,'blog/blog.html',{"newslist":newslist,"liked_news":liked_news})
+
+def get_more_news(request):
+	cursor=connection.cursor()
+	resp=[]
+	#print "fuck"
+	if request.POST:
+		#print "fuck"
+		page_num = request.POST['page_num']	#倍数
+		init_num=int(page_num)*5
+		#print "***************",page_num
+		newslist = select_order_by("blog_news","time",cursor,str(init_num),"5")
+		#print newslist
+		cursor.close()
+		for response in newslist:
+			re={}
+			re["title"]=response[1]
+			re["body"]=response[2]
+			re["pic_name"]=response[3]
+			re["date"]=str(response[4])
+			resp.append(re)
+		#print resp
+		return HttpResponse(json.dumps(resp), content_type="application/json")
 
 def dongche(request):
 	cursor=connection.cursor()
