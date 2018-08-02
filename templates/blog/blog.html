@@ -16,9 +16,9 @@
 
 {% block mainbody %}
 
-  <div class="am-u-md-8">
-  {% for list in newslist %}
-        <article class="blog-main">
+  <div class="am-u-md-8" >
+  {% for list in newslist  %}
+        <article class="blog-main" id = {{forloop.counter}}>
           <h3 class="am-article-title blog-title">
             <a href="#">{{list.1}} </a>
           </h3>
@@ -36,22 +36,22 @@
           </div>
         </article>
   {%endfor%}
-
-<!--     <hr class="am-article-divider blog-hr">
-    <hr class="am-article-divider blog-hr">
-    <ul class="am-pagination blog-pagination">
-      <li class="am-pagination-next"><a href="http://cars.jcgame.net">下一页 &raquo;</a></li>
-    </ul> -->
   </div>
-
-
-<script>
+ 
+<script>   //滑动触发事件
     var page_num =0
+    var page =5
     var slow = true
+    var Div_id = 2
+    var id=0 //div id
     $(window).scroll(function() {
-        if ($(document).scrollTop() >= $(document).height() - $(window).height()) {   //判断是否已经滚动到页面底部；
+        //var getDiv_md = $("#2"); //目标div高度
+        var getDiv_md=$("#"+Div_id)
+        var offSet = getDiv_md.offset().top;
+        var wintop = document.documentElement.scrollTop || document.body.scrollTop;
+        if  (wintop-100 > offSet && Div_id!=id ) {   //判断是否已经滚动到，并且不超过最后1个div
             page_num+=1
-            console.log("come input")
+            //console.log("come input")
             //$("#loading").css("display", "block");                                                            //切换正在加载的数据的图片状态为显示；
             jQuery.ajax({
             type:"POST",
@@ -62,8 +62,9 @@
                 success: function(data) {                                                                         
                     var str = ""                                                                                         
                     $.each(data, function(i, item) {
+                      id = page_num*page+i+1  //全局变量保存id
                       console.log(item.date)
-                             str += "<article class='blog-main'>"
+                             str += "<article class='blog-main' id="+id +" >"
                              str += "<h3 class='am-article-title blog-title'>"
                              str += "<a href='#''>"+item.title+"</a>"
                              str += "</h3>"
@@ -74,18 +75,20 @@
                     $(".am-u-md-8").append(str);
 
                     if (slow==true){
-                      if(data.length<=5){
+                      Div_id = 2+page*page_num  //每页的第2个div 开始加载下一页
+                      if(data.length<5){
+                        Div_id = id //如果是最后一页，那就是上一页的第二个div
                         slow=false
                         var strlow = "" 
-                      strlow+="<hr class='am-article-divider blog-hr'><hr class='am-article-divider blog-hr'><ul class='am-pagination blog-pagination'>"
-                      strlow+="<li class='am-pagination-next'><a href='http://cars.jcgame.net'>模拟摇号 &raquo;</a></li></ul>"
-                    $(".am-u-md-8").append(strlow);
-                    }   
+                        strlow+="<hr class='am-article-divider blog-hr'><hr class='am-article-divider blog-hr'><ul class='am-pagination blog-pagination'>"
+                        strlow+="<li class='am-pagination-next'><a href='http://cars.jcgame.net'>模拟摇号 &raquo;</a></li></ul>"
+                        $(".am-u-md-8").append(strlow);
+                      }
                     }                                          
                 }
             });
         }
-    });        
+    });          
 </script>
 {% endblock %}
 
