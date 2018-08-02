@@ -39,11 +39,11 @@
   </div>
  
 <script>   //滑动触发事件
-    var page_num =0
-    var page =5
-    var slow = true
-    var Div_id = 2
-    var id=0 //div id
+    var page_num =0 //初始页数
+    var page =5 //每页显示个数
+    var slow = true  //是否不再最底
+    var Div_id = 2  //在div id =2 的标签下开始加载
+    var id=0 //初始div id
     $(window).scroll(function() {
         //var getDiv_md = $("#2"); //目标div高度
         var getDiv_md=$("#"+Div_id)
@@ -70,7 +70,7 @@
                              str += "</h3>"
                              str +="<h4 class='am-article-meta blog-meta'> posted on " + item.date +" by wangyang thanks <a href='http://baike.baidu.com'>百度百科</a></h4>"
                             str += "<div class='am-g blog-content'><div class='am-u-lg-7'> {% autoescape off %}"+item.body+"{% endautoescape %}</div>"
-                            str +="<div class='am-u-lg-5'><p><img src='{{MEDIA_URL}}'"+item.pic_name+" ></p></div></div></article>"    
+                            str +="<div class='am-u-lg-5'><p><img src='{{MEDIA_URL}}"+item.pic_name+"'></p></div></div></article>"    
                     });
                     $(".am-u-md-8").append(str);
 
