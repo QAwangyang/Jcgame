@@ -78,3 +78,6 @@ def cocos_performance(request):
 
 def atx_server(request):
 	return render(request,'blog/atx_server.html')
+
+def locust(request):
+	return render(request,'blog/locust.html')

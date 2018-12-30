@@ -1,0 +1,163 @@
+{% extends "base.html" %}
+
+
+{% block tittle %}
+
+  <title>图说 | locust</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-siteapp"/>
+
+{% endblock %}
+
+
+{% block mainbody %}
+
+
+<nav class="scrollspy-nav" data-am-scrollspynav="{offsetTop: 15,}" data-am-sticky>
+  <ul>
+    <li><a href="#about">locust简介</a></li>
+    <li><a href="#hot">快速上手</a></li>
+    <li><a href="#result">小技巧</a></li>
+    <li><a href="#influence">常见问题及解决办法</a></li>
+  </ul>
+</nav>
+
+  <div class="am-u-md-8">
+      <article class="blog-main">
+        <h3 class="am-article-title blog-title">
+            <a href="#">locust简易强大的性能测试工具</a>
+        </h3>
+        <h4 class="am-article-meta blog-meta"> posted on 2018-12-30 by wangyang thanks <a href="http://www.wolaifan.cn">我来翻</a>，<a href="https://docs.locust.io/en/stable/">locust帮助文档</a></h4>
+
+        <div class="am-g blog-content">
+             <!-- 关闭转义 --> 
+          <article data-am-widget="paragraph" class="am-paragraph am-paragraph-default" data-am-paragraph="{ tableScrollable: true, pureview: true }">
+            <div id="about" >
+              <p class=paragraph-default-p style="text-indent:2em">locust是python编写的压力测试工具，基于python的request库发送并发请求，安装简单强大，对熟悉python的玩家来说，非常容易上手<a href=https://www.locust.io>locust官网</a></br>
+              <span>安装就一句话，推荐使用2.7.12以上版本python</br>
+              <code>pip install locust  </code></br>
+              </p>
+            </div>
+
+            <div id="hot" style="text-indent:2em">
+              <p class=paragraph-default-p>
+               <span class="big_font">快速上手</span>下面的例子可以跑起来一个最基础的测试脚本</p>
+               <code>创建一个locusttest.py的文件</code></br>
+               <pre><code class="python">
+from locust import HttpLocust, TaskSet, task
+class UserBehavior(TaskSet):
+
+    @task(2)  #task作为装饰器，括号里写数字表示了迭代的权重
+    def index(self):
+      self.client.get("/")
+
+    @task(1)
+    def index2(self):
+      self.client.get("/blog/locust")
+
+class WebsiteUser(HttpLocust):
+    host = "http://blog.jcgame.net"
+    task_set = UserBehavior
+    min_wait = 5000  #两次最小时间间隔
+    max_wait = 9000
+              </code></pre>
+               <span>写完保存好，然后cd到脚本目录下，locust -f locusttest.py </br>
+               此时会启动server，用浏览器打开localhost:8089 即可如图 </span></br>
+               <img src="/static/assets/res/locust/main.png"  alt="主界面"/>
+               <span>Number of users to simulate 设置模拟用户数总数（并发量）</br>
+Hatch rate (users spawned/second) 每秒（启动）的用户数。</span>
+
+            </div>
+
+            <div id="result" style="text-indent:2em" >
+            <p><span class="big_font">小技巧:</span></p>
+            <span>在做性能测试中，经常会有一些特别的需求,如有如下流程需求</br>
+            1.客户端登陆之后，服务器返回token</br>
+            2.随后所有的逻辑请求，需要携带服务器返回token才可发送</br>
+            3.登陆采用的id是唯一的，每个虚拟用户只能固定使用1个id</br>
+            4.登陆使用的是json传输</br>
+            下面的例子实现了上面的1234，on_start里调用login，保证每个用户只执行一次
+            </span></br>
+            <pre><code class="python">
+from locust import HttpLocust, TaskSet, task
+
+headers={"Content-type": "application/json"}
+
+class UserBehavior(TaskSet):
+    def guest_login(self, deviceId):
+        deviceId = deviceId
+        checksum = sha1.customer_sha1(deviceId) #自定义加密
+
+        data = {
+            "deviceId": deviceId,
+            "checksum": checksum,
+            "platform": 3,
+            "adid": "",
+            "name":{"id":1}
+        }
+        data = json.dumps(data)
+        response = self.client.post("/login", data, headers=headers, verify=False)
+        if response.status_code == 200:
+            self.content = json.loads(response.content)
+        else:
+            response.failure(response)
+
+    def on_start(self):  #locust提供了多种初始化方法 单个用户on_start只会被执行一次,其他方法请参考官方文档
+        #https://docs.locust.io/en/stable/
+        deviceId = self.locust.user_data_queue.get()
+        self.guest_login(deviceId)
+
+    @task
+    def update_profile(self):
+        profile = json.dumps(get_local_profile("test.json"))  # str to dict
+        if self.content["errno"] == 0:
+            secret = self.content['data']['secret']
+            token = self.content['data']['token']
+            checksum = cooking_sha1.cooking_sha1(profile, secret)
+            response = self.client.post("/update?token=%s&checksum=%s" % (token, checksum), profile,  headers=headers, verify=False)
+            #一定要加header,否则多重dict无法被服务端正确解析
+            check_response(response)
+        else:
+            print self.content
+
+
+class WebsiteUser(HttpLocust):
+    task_set = UserBehavior
+    host = "https://blog.jcgame.net"
+    min_wait = 500
+    max_wait = 2000
+    user_data_queue = Queue.Queue()  #使用队列方式保证id唯一
+    with open("test_deviceId.txt") as r:  # get login id
+        for line in r.readlines():
+            user_data_queue.put_nowait(line.strip("\n"))
+</code></pre>
+  
+            </div> 
+
+            <div id="influence" style="text-indent:2em" >  
+            <p><span class="big_font">常见问题</span>            
+            <p>问题1：locust和其他性能测试工具比优势在哪</p>
+            <p>解决：locust使用协程方式进行加压，单机拥有更高的并发量</p>
+            <p>问题2：linux可以部署么？</p>
+            <p>解决：官方文档推荐使用linux</p>
+            <p>问题3：上手有多快</p>
+            <p>解决：复制上面的例子直接可以用</p>
+            <img src="/static/assets/res/cocos/huahua.jpg"/>
+            </div> 
+
+        </article>
+            <p style="text-align:center">协程讲解：<a href=https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/001432090171191d05dae6e129940518d1d6cf6eeaaa969000>什么是协程</p>
+    </article>
+
+
+    <hr class="am-article-divider blog-hr">
+    <ul class="am-pagination blog-pagination">
+      <li class="am-pagination-next"><a href="http://cars.jcgame.net">下一页 &raquo;</a></li>
+    </ul>
+  </div>
+
+{% endblock %}
+
