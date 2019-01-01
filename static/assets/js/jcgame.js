@@ -19,3 +19,47 @@
     }
   });
 });
+
+function like(obj){
+
+  //var id = $(this).attr("id");
+  var id = obj.id
+  var like_count = parseInt($("[id=like_count][name$='"+id+"']").text())  //点赞的数量
+  like_count++   //自加1
+  $("[id=like_count][name$='"+id+"']").text(like_count)
+
+  jQuery.ajax({
+    type:"POST",
+    url:"like",
+    async:true,
+    dataType:"json",
+    data:{"id":id,"like_count":like_count},
+    success:function(data){    
+        console.log("赞")
+    }
+  });
+}
+
+// $(function(){
+
+//   $(".am-icon-btn").click(function(){
+//   var id = $(this).attr("id");
+
+//   var like_count = parseInt($("[name$='"+id+"']").text())  //点赞的数量
+//   like_count++   //自加1
+//   $("[name$='"+id+"']").text(like_count)
+
+//   jQuery.ajax({
+//     type:"POST",
+//     url:"like",
+//     async:true,
+//     dataType:"json",
+//     data:{"id":id,"like_count":like_count},
+//     success:function(data){    
+//         console.log("赞")
+//     }
+//   });
+
+// })
+
+// })

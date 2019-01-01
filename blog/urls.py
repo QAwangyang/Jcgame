@@ -10,4 +10,5 @@ urlpatterns=[
     url(r'^blog/locust',views.locust),
     url(r'^blog/atx_server',views.atx_server),
     url(r'^blog/get_more_news',views.get_more_news),
+    url(r'^blog/like',views.like),
 ]

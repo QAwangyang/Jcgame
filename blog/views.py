@@ -52,13 +52,32 @@ def get_more_news(request):
 		cursor.close()
 		for response in newslist:
 			re={}
+			re["id"]=response[0]
 			re["title"]=response[1]
 			re["body"]=response[2]
 			re["pic_name"]=response[3]
 			re["date"]=str(response[4])
+			re["like_count"]=str(response[5])
 			resp.append(re)
 		#print resp
 		return HttpResponse(json.dumps(resp), content_type="application/json")
+
+def like(request):
+	cursor=connection.cursor()
+	resp=[]
+	#print "fuck"
+	if request.POST:
+		#print "fuck"
+		like_count = request.POST['like_count']
+		news_id = request.POST['id']
+		print like_count,news_id
+		#print "***************",page_num
+		newslist = cursor.execute('update blog_news set like_count = '+ like_count + ' where id = ' + news_id)
+		#print newslist
+		cursor.close()
+
+		#print resp
+		return HttpResponse(0)
 
 def dongche(request):
 	cursor=connection.cursor()
