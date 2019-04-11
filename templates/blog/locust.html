@@ -79,6 +79,8 @@ Hatch rate (users spawned/second) 每秒（启动）的用户数。</span>
             2.随后所有的逻辑请求，需要携带服务器返回token才可发送</br>
             3.登陆采用的id是唯一的，每个虚拟用户只能固定使用1个id</br>
             4.登陆使用的是json传输</br>
+            5.主从启动：locust -f locust.py --master --port=8088</br>
+            6.locust -f locust.py --slave --master-host=172.0.0.1:8088</br>
             下面的例子实现了上面的1234，on_start里调用login，保证每个用户只执行一次
             </span></br>
             <pre><code class="python">
