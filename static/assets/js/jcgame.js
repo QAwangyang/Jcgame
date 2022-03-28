@@ -30,7 +30,7 @@ function like(obj){
 
   jQuery.ajax({
     type:"POST",
-    url:"like",
+    url:"/blog/like",
     async:true,
     dataType:"json",
     data:{"id":id,"like_count":like_count},
